@@ -11,17 +11,19 @@ import NeofetchOutput from './outputs/NeofetchOutput';
 import HackOutput from './outputs/HackOutput';
 import MatrixOutput from './outputs/MatrixOutput';
 import StatusOutput from './outputs/StatusOutput';
+import CertificationsOutput from './outputs/CertificationsOutput';
+import GalleryOutput from './outputs/GalleryOutput';
 
 type OutputItem =
   | { id: number; type: 'command'; text: string }
   | { id: number; type: 'output'; component: React.ReactNode }
   | { id: number; type: 'text'; text: string; color?: string };
 
-const QUICK_COMMANDS = ['help', 'about', 'projects', 'skills', 'experience', 'contact', 'clear'];
+const QUICK_COMMANDS = ['help', 'about', 'projects', 'skills', 'certifications', 'gallery', 'experience', 'contact', 'clear'];
 const ALL_COMMANDS = [
   'help', 'about', 'projects', 'skills', 'experience', 'education',
-  'contact', 'socials', 'whoami', 'ls', 'neofetch', 'status',
-  'hack', 'matrix', 'sudo', 'resume', 'theme', 'clear',
+  'contact', 'socials', 'certifications', 'gallery', 'whoami', 'ls',
+  'neofetch', 'status', 'hack', 'matrix', 'sudo', 'resume', 'theme', 'clear',
 ];
 
 const WELCOME_TEXT = [
@@ -44,6 +46,8 @@ function getOutput(cmd: string): React.ReactNode {
     case 'education': return <EducationOutput />;
     case 'contact': return <ContactOutput />;
     case 'socials': return <SocialsOutput />;
+    case 'certifications': return <CertificationsOutput />;
+    case 'gallery': return <GalleryOutput />;
     case 'neofetch': return <NeofetchOutput />;
     case 'hack': return <HackOutput />;
     case 'matrix': return <MatrixOutput />;
@@ -125,6 +129,7 @@ export default function Terminal() {
 
     const items: OutputItem[] = [
       { id: nextId(), type: 'command', text: trimmed },
+      { id: nextId(), type: 'text', text: '' },
     ];
 
     const textOut = getTextOutput(trimmed);
@@ -144,6 +149,7 @@ export default function Terminal() {
       }
     }
 
+    items.push({ id: nextId(), type: 'text', text: '' });
     items.push({ id: nextId(), type: 'text', text: '' });
     setOutputs(prev => [...prev, ...items]);
     setHistory(prev => [trimmed, ...prev.slice(0, 49)]);

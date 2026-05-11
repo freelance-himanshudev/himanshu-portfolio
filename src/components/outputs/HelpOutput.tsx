@@ -4,6 +4,8 @@ const commands = [
   { cmd: "skills", desc: "Technical skill matrix" },
   { cmd: "experience", desc: "Work history & roles" },
   { cmd: "education", desc: "Degrees & certifications" },
+  { cmd: "certifications", desc: "Professional credentials & achievements" },
+  { cmd: "gallery", desc: "Event photos & memories" },
   { cmd: "contact", desc: "Get in touch" },
   { cmd: "socials", desc: "Social links & profiles" },
   { cmd: "whoami", desc: "Current operator info" },
